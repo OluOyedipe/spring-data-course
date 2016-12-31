@@ -1,5 +1,7 @@
 package com.oreilly.sdata
 
+import groovy.transform.Canonical
+
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
@@ -12,6 +14,7 @@ import javax.persistence.Table
  */
 @Table(name = 'BOOK')
 @Entity
+@Canonical
 class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
