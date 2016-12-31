@@ -9,30 +9,10 @@ import org.springframework.stereotype.Repository
 @Repository
 interface BookRepository extends JpaRepository<Book, Long> {
 
-    /**
-     * Derived query:
-     * select book0_.BOOK_ID as BOOK_ID1_0_, book0_.PAGE_COUNT as PAGE_COU2_0_, book0_.PRICE as PRICE3_0_,
-     * book0_.PUBLISH_DATE as PUBLISH_4_0_, book0_.TITLE as TITLE5_0_ from BOOK book0_ where book0_.TITLE=?
-     */
-    Book findByTitle(String title)
-
-    /**
-     * Derived query: Manually add the wildcard
-     * select book0_.BOOK_ID as BOOK_ID1_0_, book0_.PAGE_COUNT as PAGE_COU2_0_, book0_.PRICE as PRICE3_0_,
-     * book0_.PUBLISH_DATE as PUBLISH_4_0_, book0_.TITLE as TITLE5_0_ from BOOK book0_ where book0_.TITLE like ?
-     */
-    List<Book> findByTitleLike(String title)
-
-    /**
-     * Derived query: Automatically adds wildcard
-     * select book0_.BOOK_ID as BOOK_ID1_0_, book0_.PAGE_COUNT as PAGE_COU2_0_, book0_.PRICE as PRICE3_0_,
-     * book0_.PUBLISH_DATE as PUBLISH_4_0_, book0_.TITLE as TITLE5_0_ from BOOK book0_ where book0_.TITLE like ?
-     */
-    List<Book> findByTitleContaining(String title)
-
-    List<Book> findByTitleStartingWith(String title)
-
-    List<Book> findByTitleEndingWith(String title)
-
-    List<Book> findByTitleIgnoreCase(String title)
+    List<Book> findByPageCountEquals(int pageCount)
+    List<Book> findByPageCountGreaterThan(int pageCount)
+    List<Book> findByPageCountLessThan(int pageCount)
+    List<Book> findByPageCountGreaterThanEqual(int pageCount)
+    List<Book> findByPageCountLessThanEqual(int pageCount)
+    List<Book> findByPageCountBetween(int pageCountMin, int pageCountMax)
 }

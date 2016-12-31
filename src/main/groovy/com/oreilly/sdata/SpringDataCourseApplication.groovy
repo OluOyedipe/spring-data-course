@@ -13,25 +13,15 @@ class SpringDataCourseApplication {
 
         BookRepository bookRepository = context.getBean(BookRepository)
 
-        log.info "${bookRepository.findByTitle('Design Patterns')}"
-
-        bookRepository.findByTitleLike('%of%').each {
+        bookRepository.findByPageCountEquals(300).each {
             log.info "$it"
         }
 
-        bookRepository.findByTitleContaining('of').each {
+        bookRepository.findByPageCountLessThan(150).each {
             log.info "$it"
         }
 
-        bookRepository.findByTitleStartingWith('O').each {
-            log.info "$it"
-        }
-
-        bookRepository.findByTitleEndingWith('s').each {
-            log.info "$it"
-        }
-
-        bookRepository.findByTitleIgnoreCase('DESIGN PATTERNS').each {
+        bookRepository.findByPageCountBetween(160, 220).each {
             log.info "$it"
         }
 
