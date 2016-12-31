@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository
 @Repository
 interface BookRepository extends JpaRepository<Book, Long> {
 
-    List<Book> findByTitleContainingOrderByTitleAsc(String title)
-    List<Book> findByTitleContainingOrderByTitleDesc(String title)
+    List<Book> findTopByOrderByPageCountDesc()
+    List<Book> findFirstByOrderByPageCountAsc()
+    List<Book> findTop5ByOrderByPriceDesc()
+    List<Book> findTop5ByTitleOrderByPriceAsc(String title)
 }
