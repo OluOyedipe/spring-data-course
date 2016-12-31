@@ -13,22 +13,19 @@ class SpringDataCourseApplication {
 
         BookRepository bookRepository = context.getBean(BookRepository)
 
-        Book book = bookRepository.findOne(1L)
-        log.info "$book"
+        Book book = new Book().with {
+            title = 'Book title'
+            pageCount = 100
+            price = 100.0
+            publishDate = new Date()
 
-        List<Book> books = bookRepository.findAll()
-
-        books.each {
-            log.info "$it"
+            it
         }
 
-        books = bookRepository.findAll([1L, 3L, 7L])
+        bookRepository.save(book)
 
-        log.info "Using a filtered list"
-
-        books.each {
-            log.info "$it"
-        }
+        List<Book> books = BookUtil.create(5)
+        bookRepository.save(books)
 
 	}
 }
