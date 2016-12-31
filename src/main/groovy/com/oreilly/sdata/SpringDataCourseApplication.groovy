@@ -15,18 +15,11 @@ class SpringDataCourseApplication {
 
         BookRepository bookRepository = context.getBean(BookRepository)
 
-        Date date = new SimpleDateFormat('MM/dd/yyyy').parse('10/22/1995')
-        Date date2 = new SimpleDateFormat('MM/dd/yyyy').parse('10/22/1997')
-
-        bookRepository.findByPublishDateAfter(date).each {
+        bookRepository.findByTitleContainingOrderByTitleAsc('a').each {
             log.info "$it"
         }
 
-        bookRepository.findByPublishDateBefore(date).each {
-            log.info "$it"
-        }
-
-        bookRepository.findByPublishDateBetween(date, date2).each {
+        bookRepository.findByTitleContainingOrderByTitleDesc('a').each {
             log.info "$it"
         }
 

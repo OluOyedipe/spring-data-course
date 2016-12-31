@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository
 @Repository
 interface BookRepository extends JpaRepository<Book, Long> {
 
-    List<Book> findByPublishDateAfter(Date date)
-    List<Book> findByPublishDateBefore(Date date)
-    List<Book> findByPublishDateBetween(Date startDate, Date endDate)
+    List<Book> findByTitleContainingOrderByTitleAsc(String title)
+    List<Book> findByTitleContainingOrderByTitleDesc(String title)
 }
