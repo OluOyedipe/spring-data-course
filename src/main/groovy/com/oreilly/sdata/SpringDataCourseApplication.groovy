@@ -13,12 +13,12 @@ class SpringDataCourseApplication {
 
         BookRepository bookRepository = context.getBean(BookRepository)
 
-        bookRepository.delete(1L)
+        log.info "${bookRepository.findOne(2L)}"
 
-        bookRepository.delete(bookRepository.findOne(2L))
+        List<Book> books = bookRepository.findAll()
 
-        List<Book> books = bookRepository.findAll([1L, 2L, 3L])
-        bookRepository.deleteInBatch(books)
+        books.each { log.info "$it" }
+
 
 
 	}
