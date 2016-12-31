@@ -13,11 +13,7 @@ class SpringDataCourseApplication {
 
         BookRepository bookRepository = context.getBean(BookRepository)
 
-        log.info "${bookRepository.findOne(2L)}"
-
-        List<Book> books = bookRepository.findAll()
-
-        books.each { log.info "$it" }
+        log.info "${bookRepository.findByTitle('Animal Farm')}"
 
 
 
