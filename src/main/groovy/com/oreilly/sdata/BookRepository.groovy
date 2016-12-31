@@ -9,10 +9,7 @@ import org.springframework.stereotype.Repository
 @Repository
 interface BookRepository extends JpaRepository<Book, Long> {
 
-    List<Book> findByPageCountEquals(int pageCount)
-    List<Book> findByPageCountGreaterThan(int pageCount)
-    List<Book> findByPageCountLessThan(int pageCount)
-    List<Book> findByPageCountGreaterThanEqual(int pageCount)
-    List<Book> findByPageCountLessThanEqual(int pageCount)
-    List<Book> findByPageCountBetween(int pageCountMin, int pageCountMax)
+    List<Book> findByTitleContainingOrTitleContaining(String title, String title2)
+    List<Book> findByTitleContainingAndPageCountGreaterThan(String title, int pageCount)
+    List<Book> findByTitleNot(String title)
 }

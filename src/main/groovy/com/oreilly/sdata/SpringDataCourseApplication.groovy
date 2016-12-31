@@ -13,15 +13,15 @@ class SpringDataCourseApplication {
 
         BookRepository bookRepository = context.getBean(BookRepository)
 
-        bookRepository.findByPageCountEquals(300).each {
+        bookRepository.findByTitleContainingOrTitleContaining('of', 'and').each {
             log.info "$it"
         }
 
-        bookRepository.findByPageCountLessThan(150).each {
+        bookRepository.findByTitleContainingAndPageCountGreaterThan('of', 125).each {
             log.info "$it"
         }
 
-        bookRepository.findByPageCountBetween(160, 220).each {
+        bookRepository.findByTitleNot('Animal Farm').each {
             log.info "$it"
         }
 
