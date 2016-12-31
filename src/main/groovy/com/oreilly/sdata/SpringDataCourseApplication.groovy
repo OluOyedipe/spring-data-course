@@ -13,19 +13,18 @@ class SpringDataCourseApplication {
 
         BookRepository bookRepository = context.getBean(BookRepository)
 
-        Book book = new Book().with {
-            title = 'Book title'
-            pageCount = 100
-            price = 100.0
-            publishDate = new Date()
+        Book book = bookRepository.findOne(1L)
+        log.info "$book"
 
-            it
-        }
-
+        book.title = 'War And Peace'
         bookRepository.save(book)
 
-        List<Book> books = BookUtil.create(5)
-        bookRepository.save(books)
+        log.info "$book"
+
+        book.bookId = 1000L
+        bookRepository.save(book)
+
+        log.info "$book"
 
 	}
 }
