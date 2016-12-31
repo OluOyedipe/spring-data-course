@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository
 @Repository
 interface BookRepository extends JpaRepository<Book, Long> {
 
-    List<Book> findByTitleContainingOrTitleContaining(String title, String title2)
-    List<Book> findByTitleContainingAndPageCountGreaterThan(String title, int pageCount)
-    List<Book> findByTitleNot(String title)
+    List<Book> findByPublishDateAfter(Date date)
+    List<Book> findByPublishDateBefore(Date date)
+    List<Book> findByPublishDateBetween(Date startDate, Date endDate)
 }
