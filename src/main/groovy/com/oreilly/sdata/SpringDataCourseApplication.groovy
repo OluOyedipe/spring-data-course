@@ -15,15 +15,11 @@ class SpringDataCourseApplication {
 
         BookRepository bookRepository = context.getBean(BookRepository)
 
-        bookRepository.findTopByOrderByPageCountDesc().each {
+        bookRepository.findByAuthorFirstName('William').each {
             log.info "$it"
         }
 
-        bookRepository.findTop5ByOrderByPriceDesc().each {
-            log.info "$it"
-        }
-
-        bookRepository.findTop5ByTitleOrderByPriceAsc('Animal Farm').each {
+        bookRepository.findByAuthor_Country('United States').each {
             log.info "$it"
         }
 

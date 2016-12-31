@@ -7,6 +7,8 @@ import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
+import javax.persistence.JoinColumn
+import javax.persistence.ManyToOne
 import javax.persistence.Table
 
 /**
@@ -32,4 +34,8 @@ class Book {
 
     @Column(name = 'PRICE')
     BigDecimal price
+
+    @ManyToOne
+    @JoinColumn(name = 'AUTHOR_ID')
+    Author author
 }
