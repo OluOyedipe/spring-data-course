@@ -36,6 +36,7 @@ class DataConfiguration {
     EntityManagerFactory entityManagerFactory() {
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter()
         vendorAdapter.generateDdl = true
+        vendorAdapter.showSql = true
 
         Properties jpaProperties = new Properties().with {
             put('hibernate.hbm2ddl.auto', 'create-drop')
