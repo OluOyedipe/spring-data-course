@@ -13,9 +13,11 @@ class SpringDataCourseApplication {
 
         BookRepository bookRepository = context.getBean(BookRepository)
 
-        bookRepository.findByIds(2L, 7L).each {
-            log.info "$it"
-        }
+        Book book = BookUtil.create()
+        bookRepository.save(book)
+
+        log.info "${bookRepository.findOne(book.bookId)}"
+
 
 
 

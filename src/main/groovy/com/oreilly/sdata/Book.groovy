@@ -1,10 +1,16 @@
 package com.oreilly.sdata
 
 import groovy.transform.Canonical
+import org.springframework.data.annotation.CreatedBy
+import org.springframework.data.annotation.CreatedDate
+import org.springframework.data.annotation.LastModifiedBy
+import org.springframework.data.annotation.LastModifiedDate
+import org.springframework.data.jpa.domain.support.AuditingEntityListener
 import org.springframework.data.jpa.repository.Query
 
 import javax.persistence.Column
 import javax.persistence.Entity
+import javax.persistence.EntityListeners
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
@@ -23,6 +29,7 @@ import javax.persistence.Table
 @NamedQueries([@NamedQuery(name = 'Book.queryOne', query = 'select b from Book b'),
 @NamedQuery(name = 'Book.queryTwo', query = 'select b from Book b where b.pageCount > ?1'),
 @NamedQuery(name = 'Book.queryThree', query = 'select b from Book b where b.title = :title')])
+@EntityListeners(AuditingEntityListener)
 class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,4 +51,16 @@ class Book {
     @ManyToOne
     @JoinColumn(name = 'AUTHOR_ID')
     Author author
+
+    @CreatedBy
+    String createdBy
+
+    @LastModifiedBy
+    String lastModifiedBy
+
+    @CreatedDate
+    Date createdDate
+
+    @LastModifiedDate
+    Date lastModifiedDate
 }
