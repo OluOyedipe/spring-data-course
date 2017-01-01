@@ -2,6 +2,9 @@ package com.oreilly.sdata
 
 import groovy.util.logging.Slf4j
 import org.springframework.context.annotation.AnnotationConfigApplicationContext
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Slice
 import org.springframework.data.domain.Sort
 
 //@SpringBootApplication
@@ -14,24 +17,21 @@ class SpringDataCourseApplication {
 
         BookRepository bookRepository = context.getBean(BookRepository)
 
-        bookRepository.findAll(new Sort('pageCount')).each {
+        Page page = bookRepository.findByPageCountGreaterThan(120, new PageRequest(4, 3))
+
+        log.info "Total objects: ${page.totalElements}"
+        log.info "Total pages: ${page.totalPages}"
+
+        page.each {
             log.info "$it"
         }
 
-        bookRepository.findAll(new Sort(Sort.Direction.DESC, 'pageCount')).each {
-            log.info "$it"
-        }
+        Slice slice = bookRepository.findByPageCountLessThan(220, new PageRequest(0, 3))
 
-        bookRepository.findAll(new Sort(Sort.Direction.ASC, 'author.lastName', 'pageCount')).each {
-            log.info "$it"
-        }
+        log.info "Total elements in slice: ${slice.numberOfElements}"
+        log.info "Slice number: ${slice.number}"
 
-        bookRepository.findAll(new Sort(Sort.Direction.ASC, 'author.lastName')
-                .and(new Sort(Sort.Direction.DESC, 'pageCount'))).each {
-            log.info "$it"
-        }
-
-        bookRepository.findByPageCountGreaterThan(220, new Sort('author.lastName')).each {
+        slice.each {
             log.info "$it"
         }
 
