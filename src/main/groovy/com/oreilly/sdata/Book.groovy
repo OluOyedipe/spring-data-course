@@ -1,6 +1,7 @@
 package com.oreilly.sdata
 
 import groovy.transform.Canonical
+import org.springframework.data.jpa.repository.Query
 
 import javax.persistence.Column
 import javax.persistence.Entity
@@ -9,6 +10,8 @@ import javax.persistence.GenerationType
 import javax.persistence.Id
 import javax.persistence.JoinColumn
 import javax.persistence.ManyToOne
+import javax.persistence.NamedQueries
+import javax.persistence.NamedQuery
 import javax.persistence.Table
 
 /**
@@ -17,6 +20,9 @@ import javax.persistence.Table
 @Table(name = 'BOOK')
 @Entity
 @Canonical
+@NamedQueries([@NamedQuery(name = 'Book.queryOne', query = 'select b from Book b'),
+@NamedQuery(name = 'Book.queryTwo', query = 'select b from Book b where b.pageCount > ?1'),
+@NamedQuery(name = 'Book.queryThree', query = 'select b from Book b where b.title = :title')])
 class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
