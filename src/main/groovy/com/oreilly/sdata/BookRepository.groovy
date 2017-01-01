@@ -1,6 +1,7 @@
 package com.oreilly.sdata
 
 import org.springframework.data.domain.Pageable
+import org.springframework.data.domain.Sort
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
@@ -10,5 +11,5 @@ import org.springframework.stereotype.Repository
 @Repository
 interface BookRepository extends JpaRepository<Book, Long> {
 
-    List<Book> findByPageCountGreaterThan(int pageCount, Pageable pageable)
+    List<Book> findByPageCountGreaterThan(int pageCount, Sort sort)
 }
