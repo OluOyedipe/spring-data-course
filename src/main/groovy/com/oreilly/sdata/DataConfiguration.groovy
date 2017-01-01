@@ -20,7 +20,7 @@ import javax.sql.DataSource
  * Created by oo185005 on 12/30/16.
  */
 @Configuration
-@EnableJpaRepositories('com.oreilly.sdata')
+@EnableJpaRepositories(basePackages = 'com.oreilly.sdata', repositoryImplementationPostfix = 'CustomImpl')
 @EnableTransactionManagement
 @ComponentScan('com.oreilly.sdata')
 class DataConfiguration {

@@ -19,21 +19,7 @@ class SpringDataCourseApplication {
 
         Page page = bookRepository.findByPageCountGreaterThan(120, new PageRequest(4, 3))
 
-        log.info "Total objects: ${page.totalElements}"
-        log.info "Total pages: ${page.totalPages}"
-
-        page.each {
-            log.info "$it"
-        }
-
-        Slice slice = bookRepository.findByPageCountLessThan(220, new PageRequest(0, 3))
-
-        log.info "Total elements in slice: ${slice.numberOfElements}"
-        log.info "Slice number: ${slice.number}"
-
-        slice.each {
-            log.info "$it"
-        }
+        bookRepository.saveAndLog(BookUtil.create())
 
 
 
