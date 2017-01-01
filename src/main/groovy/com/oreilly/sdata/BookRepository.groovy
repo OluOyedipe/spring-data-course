@@ -1,10 +1,9 @@
 package com.oreilly.sdata
 
-import org.springframework.data.domain.Page
-import org.springframework.data.domain.Pageable
-import org.springframework.data.domain.Slice
-import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.data.jpa.repository.Modifying
+import org.springframework.data.jpa.repository.Query
 import org.springframework.stereotype.Repository
+import org.springframework.transaction.annotation.Transactional
 
 /**
  * Created by oo185005 on 12/30/16.
@@ -12,6 +11,8 @@ import org.springframework.stereotype.Repository
 @Repository
 interface BookRepository extends BaseRepository<Book, Long> {
 
-    Page<Book> findByPageCountGreaterThan(int pageCount, Pageable pageable)
-    Slice<Book> findByPageCountLessThan(int pageCount, Pageable pageable)
+    @Transactional
+    @Modifying
+    @Query('update Book b set b.pageCount = ?2 where b.title like ?1')
+    int setPageCount(String title, int pageCount)
 }

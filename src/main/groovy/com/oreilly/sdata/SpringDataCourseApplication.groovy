@@ -13,12 +13,17 @@ class SpringDataCourseApplication {
 
         BookRepository bookRepository = context.getBean(BookRepository)
 
-        Book book = BookUtil.create()
-        bookRepository.save(book)
+        log.info "${bookRepository.setPageCount('Animal Farm', 1000)}"
 
-        log.info "${bookRepository.findOne(book.bookId)}"
+        bookRepository.findAll().each {
+            log.info "$it"
+        }
 
+        log.info "${bookRepository.setPageCount('%and%', 1000)}"
 
+        bookRepository.findAll().each {
+            log.info "$it"
+        }
 
 
 
