@@ -2,8 +2,7 @@ package com.oreilly.sdata
 
 import groovy.util.logging.Slf4j
 import org.springframework.context.annotation.AnnotationConfigApplicationContext
-
-import java.text.SimpleDateFormat
+import org.springframework.data.domain.PageRequest
 
 //@SpringBootApplication
 //@EnableAutoConfiguration
@@ -15,17 +14,14 @@ class SpringDataCourseApplication {
 
         BookRepository bookRepository = context.getBean(BookRepository)
 
-        bookRepository.queryOne().each {
+        bookRepository.findAll(new PageRequest(1, 4)).each {
             log.info "$it"
         }
 
-        bookRepository.queryTwo(200).each {
+        bookRepository.findByPageCountGreaterThan(150, new PageRequest(1, 3)).each {
             log.info "$it"
         }
 
-        bookRepository.queryThree('Animal Farm').each {
-            log.info "$it"
-        }
 
 
 
