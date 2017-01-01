@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository
  * Created by oo185005 on 12/30/16.
  */
 @Repository
-interface BookRepository extends JpaRepository<Book, Long>, BookRepositoryCustom {
+interface BookRepository extends BaseRepository<Book, Long> {
 
     Page<Book> findByPageCountGreaterThan(int pageCount, Pageable pageable)
     Slice<Book> findByPageCountLessThan(int pageCount, Pageable pageable)

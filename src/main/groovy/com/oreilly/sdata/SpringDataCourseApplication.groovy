@@ -2,10 +2,6 @@ package com.oreilly.sdata
 
 import groovy.util.logging.Slf4j
 import org.springframework.context.annotation.AnnotationConfigApplicationContext
-import org.springframework.data.domain.Page
-import org.springframework.data.domain.PageRequest
-import org.springframework.data.domain.Slice
-import org.springframework.data.domain.Sort
 
 //@SpringBootApplication
 //@EnableAutoConfiguration
@@ -17,9 +13,9 @@ class SpringDataCourseApplication {
 
         BookRepository bookRepository = context.getBean(BookRepository)
 
-        Page page = bookRepository.findByPageCountGreaterThan(120, new PageRequest(4, 3))
-
-        bookRepository.saveAndLog(BookUtil.create())
+        bookRepository.findByIds(2L, 7L).each {
+            log.info "$it"
+        }
 
 
 
