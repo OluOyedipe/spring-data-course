@@ -1,15 +1,18 @@
 package com.oreilly.sdata
 
 import groovy.util.logging.Slf4j
-import org.springframework.context.annotation.AnnotationConfigApplicationContext
+import org.springframework.boot.SpringApplication
+import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.context.ApplicationContext
 
 //@SpringBootApplication
 //@EnableAutoConfiguration
+@SpringBootApplication
 @Slf4j
 class SpringDataCourseApplication {
 
 	static void main(String[] args) {
-		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(DataConfiguration)
+        ApplicationContext context = SpringApplication.run(SpringDataCourseApplication)
 
         BookRepository bookRepository = context.getBean(BookRepository)
 

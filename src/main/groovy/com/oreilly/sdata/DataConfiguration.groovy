@@ -1,5 +1,6 @@
 package com.oreilly.sdata
 
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.domain.EntityScan
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.ComponentScan
@@ -29,12 +30,15 @@ import javax.sql.DataSource
 @ComponentScan('com.oreilly.sdata')
 class DataConfiguration {
 
-    @Bean
-    DataSource dataSource() {
-        EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder()
-        builder.type = EmbeddedDatabaseType.H2
-        builder.build()
-    }
+//    @Bean
+//    DataSource dataSource() {
+//        EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder()
+//        builder.type = EmbeddedDatabaseType.H2
+//        builder.build()
+//    }
+
+    @Autowired
+    DataSource dataSource
 
     @Bean
     TaskExecutor executor() {
@@ -60,13 +64,13 @@ class DataConfiguration {
         Properties jpaProperties = new Properties().with {
             put('hibernate.hbm2ddl.auto', 'create-drop')
             put('hibernate.hbm2ddl.import_files', 'init.sql')
-            put('hibernate.dialect', 'org.hibernate.dialect.HSQLDialect')
+            put('hibernate.dialect', 'org.hibernate.dialect.MySQLDialect')
 
             it
         }
 
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean()
-        factoryBean.dataSource = dataSource()
+        factoryBean.dataSource = dataSource
         factoryBean.packagesToScan = ['com.oreilly.sdata']
         factoryBean.jpaVendorAdapter = vendorAdapter
         factoryBean.jpaProperties = jpaProperties
